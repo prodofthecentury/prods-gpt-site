@@ -1,0 +1,10 @@
+title: ProdsGPT
+description: Automatically upload and publish music/audio content to TikTok using the TikTok Content Posting API.
+theme: jekyll-theme-cayman
+markdown: kramdown
+plugins: []
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
