@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProdsGPT - TikTok Audio Publishing Tool</title>
+    <title>ProdsGPT - Audio Publishing Tool</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,6 @@
             border-radius: 10px;
         }
         .login-btn {
-            background-color: #FE2C55;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -35,6 +34,15 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .tiktok-btn {
+            background-color: #FE2C55;
+        }
+        .youtube-btn {
+            background-color: #FF0000;
+            margin-left: 10px;
         }
         footer {
             margin-top: 50px;
@@ -50,11 +58,14 @@
     <div class="container">
         <img src="your-skull-logo.png" alt="ProdsGPT Logo" class="logo">
         <h1>ProdsGPT</h1>
-        <h2>Audio Publishing for TikTok</h2>
+        <h2>Audio Publishing for Social Media</h2>
         
-        <p>Upload your audio, add captions, and post directly to TikTok with one click.</p>
+        <p>Upload your audio, add captions, and post directly to social media with one click.</p>
         
-        <button class="login-btn" id="tiktok-login">Login with TikTok</button>
+        <div class="buttons">
+            <button class="login-btn tiktok-btn" id="tiktok-login">Login with TikTok</button>
+            <a href="youtube.html" class="login-btn youtube-btn">YouTube Integration</a>
+        </div>
         
         <footer>
             <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
