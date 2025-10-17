@@ -1,1 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProdsGPT - YouTube Audio Publishing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .logo {
+            width: 100px;
+            margin: 20px auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0,0,0,0.7);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .login-btn {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #uploadForm {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #333;
+            background-color: #111;
+            color: #fff;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+        }
+        a {
+            color: #FF0000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="your-skull-logo.png" alt="ProdsGPT Logo" class="logo">
+        <h1>ProdsGPT</h1>
+        <h2>Audio Publishing for YouTube</h2>
+        
+        <p>Upload your audio, add details, and post directly to YouTube with one click.</p>
+        
+        <button class="login-btn" id="authorize-button">Login with YouTube</button>
+        
+        <div id="uploadForm">
+            <h3>Upload to YouTube</h3>
+            
+            <form id="videoForm">
+                <label for="file">Audio/Video File:</label>
+                <input type="file" id="file" accept="audio/*,video/*" required>
+                
+                <label for="title">Title:</label>
+                <input type="text" id="title" required>
+                
+                <label for="description">Description:</label>
+                <textarea id="description" rows="4"></textarea>
+                
+                <label for="tags">Tags (comma separated):</label>
+                <input type="text" id="tags">
+                
+                <button type="submit" class="login-btn" style="margin-top: 20px;">Upload to YouTube</button>
+            </form>
+        </div>
+        
+        <footer>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </footer>
+    </div>
 
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        // Replace with your actual client ID from Google Cloud Console
+        const CLIENT_ID = 'YOUR_CLIENT_ID';
+        const API_KEY = 'YOUR_API_KEY';
+        
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+        
+        // Authorization scopes required by the API
+        const SCOPES = 'https://www.googleapis.com/auth/youtube.upload';
+        
+        let authorizeButton = document.getElementById('authorize-button');
+        let uploadForm = document.getElementById('uploadForm');
+        
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+        
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                
+                // Handle the initial sign-in state
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                authorizeButton.onclick = handleAuthClick;
+            }).catch(function(error) {
+                console.error('Error initializing YouTube API client', error);
+            });
+        }
+        
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                authorizeButton.style.display = 'none';
+                uploadForm.style.display = 'block';
+            } else {
+                authorizeButton.style.display = 'block';
+                uploadForm.style.display = 'none';
+            }
+        }
+        
+        function handleAuthClick() {
+            gapi.auth2.getAuthInstance().signIn();
+        }
+        
+        document.getElementById('videoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            uploadVideo();
+        });
+        
+        function uploadVideo() {
+            const file = document.getElementById('file').files[0];
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim());
+            
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+            
+            const metadata = {
+                snippet: {
+                    title: title,
+                    description: description,
+                    tags: tags,
+                    categoryId: '10' // Music category
+                },
+                status: {
+                    privacyStatus: 'private' // Start as private for safety
+                }
+            };
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const uploadRequest = gapi.client.youtube.videos.insert({
+                    part: Object.keys(metadata).join(','),
+                    resource: metadata,
+                    media: {
+                        body: e.target.result
+                    }
+                });
+                
+                uploadRequest.execute(function(response) {
+                    if (response.error) {
+                        console.error('Upload failed:', response.error);
+                        alert('Upload failed: ' + response.error.message);
+                    } else {
+                        alert('Upload successful! Video ID: ' + response.id);
+                    }
+                });
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+        
+        // Call handleClientLoad on page load
+        window.onload = handleClientLoad;
+    </script>
+</body>
+</html>
