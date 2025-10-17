@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Authorization - ProdsGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(0,0,0,0.7);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 100px;
+        }
+        .success-icon {
+            font-size: 60px;
+            color: #FF0000;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        <h1>YouTube Authorization Successful</h1>
+        <p>You have successfully connected your YouTube account.</p>
+        <p>You may close this window and return to ProdsGPT.</p>
+    </div>
 
+    <script>
+        // This page handles the OAuth callback from YouTube/Google
+        // Most of the actual auth handling is done by the Google API client library
+        window.onload = function() {
+            window.opener && window.opener.postMessage('youtube-auth-success', '*');
+        };
+    </script>
+</body>
+</html>
