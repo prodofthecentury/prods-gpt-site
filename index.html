@@ -1,89 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProdsGPT - Audio Publishing Tool</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            background-image: url('frontpagebg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        .logo {
-            width: 100px;
-            margin: 20px auto;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(0,0,0,0.7);
-            padding: 30px;
-            border-radius: 10px;
-        }
-        .login-btn {
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .tiktok-btn {
-            background-color: #FE2C55;
-        }
-        .youtube-btn {
-            background-color: #FF0000;
-            margin-left: 10px;
-        }
-        footer {
-            margin-top: 50px;
-            font-size: 14px;
-        }
-        a {
-            color: #FE2C55;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ProdsGPT - Audio Publishing Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      background-image: url('frontpagebg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .logo { width: 100px; margin: 20px auto; }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .login-btn {
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tiktok-btn { background-color: #FE2C55; }
+    .youtube-btn { background-color: #FF0000; margin-left: 10px; }
+    .facebook-btn { background-color: #1877F2; margin-left: 10px; }
+    footer { margin-top: 50px; font-size: 14px; }
+    a { color: #FE2C55; text-decoration: none; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <img src="b61c944ba5c8bd01451c5e7c961e828d~tplv-tiktokx-cropcenter_100_100.jpg" alt="ProdsGPT Logo" class="logo">
-        <h1>ProdsGPT</h1>
-        <h2>Audio Publishing for Social Media</h2>
-        
-        <p>Upload your audio, add captions, and post directly to social media with one click.</p>
-        
-        <div class="buttons">
-            <button class="login-btn tiktok-btn" id="tiktok-login">Login with TikTok</button>
-            <a href="youtube.html" class="login-btn youtube-btn">YouTube Integration</a>
-        </div>
-        
-        <footer>
-            <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-        </footer>
+  <div class="container">
+    <img src="b61c944ba5c8bd01451c5e7c961e828d~tplv-tiktokx-cropcenter_100_100.jpg" alt="ProdsGPT Logo" class="logo">
+    <h1>ProdsGPT</h1>
+    <h2>Audio Publishing for Social Media</h2>
+
+    <p>Upload your audio, add captions, and post directly to social media with one click.</p>
+
+    <div class="buttons">
+      <button class="login-btn tiktok-btn" id="tiktok-login">Login with TikTok</button>
+      <a href="youtube.html" class="login-btn youtube-btn">YouTube Integration</a>
+      <a href="https://prods-gpt-api.vercel.app/api/auth/facebook" class="login-btn facebook-btn">Connect Facebook</a>
     </div>
 
-    <!-- Connect Facebook Page -->
-<a href="https://prods-gpt-api.vercel.app/api/auth/facebook"
-   style="display:inline-block;padding:12px 16px;margin:8px 0;border:1px solid #ccc;border-radius:8px;text-decoration:none;font-family:sans-serif">
-  Connect Facebook Page
-</a>
+    <footer>
+      <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    </footer>
+  </div>
 
-    <script>
-        document.getElementById('tiktok-login').addEventListener('click', function() {
-            // This will be replaced with actual TikTok OAuth redirect code
-            alert('TikTok login will be implemented here');
-            // Example: window.location.href = 'YOUR_TIKTOK_OAUTH_URL';
-        });
-    </script>
+  <script>
+    document.getElementById('tiktok-login').addEventListener('click', function () {
+      // Replace this alert with your TikTok OAuth redirect
+      alert('TikTok login will be implemented here');
+      // Example: window.location.href = 'YOUR_TIKTOK_OAUTH_URL';
+    });
+  </script>
 </body>
 </html>
+
